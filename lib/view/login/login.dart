@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoppy/utils/app_color.dart';
+import 'package:shoppy/utils/app_image.dart';
 import 'package:shoppy/widgets/text_design.dart';
 
 class Login extends StatelessWidget {
@@ -31,7 +32,7 @@ class Login extends StatelessWidget {
               height: 50.h,
             ),
             Image.asset(
-              'assets/images/png/logo.png',
+              AppImage.LOGO,
               height: 200.h,
               width: 200.w,
               fit: BoxFit.fill,
@@ -101,6 +102,30 @@ class Login extends StatelessWidget {
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColor.WHITE_COLOR,
+                )),
+            SizedBox(
+              height: 20.h,
+            ),
+            TextDesign(
+              text: "OR",
+              fontSize: 24.sp,
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w600,
+              color: AppColor.WHITE_COLOR,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.WHITE_COLOR,
+                  padding: EdgeInsets.all(15.h),
+                ),
+                child: TextDesign(
+                  text: 'Google',
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w600,
                 )),
           ],
         ),

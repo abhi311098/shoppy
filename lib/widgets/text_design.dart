@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../utils/app_color.dart';
+
 class TextDesign extends StatelessWidget {
   String? text;
   double? fontSize;
@@ -28,7 +30,7 @@ class TextDesign extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines ?? 100,
       style: GoogleFonts.lato(
-        color: color ?? Colors.black,
+        color: color ?? AppColor.BLACK_COLOR,
         fontWeight: fontWeight ?? FontWeight.w500,
         fontSize: fontSize ?? 16,
       ),

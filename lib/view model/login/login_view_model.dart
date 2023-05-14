@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoppy/model/login/login_response_model.dart';
 import 'package:shoppy/service/api_service.dart';
 import 'package:shoppy/service/api_status.dart';
 import 'package:shoppy/utils/api_collection.dart';
+import 'package:shoppy/view/product/product_list.dart';
 
 class LoginViewModel with ChangeNotifier {
 
@@ -26,8 +28,14 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  setLoginResponseModel(LoginResponseModel value) {
+  setLoginResponseModel(LoginResponseModel value, BuildContext context) async {
     _loginResponseModel = value;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("userName", _loginResponseModel?.username ?? "");
+    preferences.setInt("userId", _loginResponseModel?.id ?? 0);
+    preferences.setString("userToken", _loginResponseModel?.token ?? "");
+    preferences.setString("userNameAndLast", "${_loginResponseModel?.firstName} ${_loginResponseModel?.lastName}");
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => ProductList())));
     notifyListeners();
   }
 
@@ -36,7 +44,7 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  loginApiCall() async {
+  loginApiCall(context) async {
     setLoading(true);
     Map map = {};
     map['username'] = usernameController.text;
@@ -44,8 +52,8 @@ class LoginViewModel with ChangeNotifier {
     var response =
         await ApiService.apiPostCall(url: ApiCollection.LOGIN, body: map,);
     if (response is Success) {
-      Object data = loginResponseModelFromJson(response as String);
-      setLoginResponseModel(data as LoginResponseModel);
+      Object data = loginResponseModelFromJson(response.response.toString());
+      setLoginResponseModel(data as LoginResponseModel, context);
     } else if(response is Failure){
       ApiError apiError = ApiError(response: response.response);
       setApiError(apiError);

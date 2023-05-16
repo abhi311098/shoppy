@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shoppy/view%20model/login/login_view_model.dart';
+import 'package:shoppy/view%20model/product/product_list_view_model.dart';
 import 'package:shoppy/view/splash_screen.dart';
 
 import 'view/login/login.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => LoginViewModel()),
+      ChangeNotifierProvider(create: (_) => ProductListViewModel()),
     ],
     child: ScreenUtilInit(
           designSize: const Size(375, 812),

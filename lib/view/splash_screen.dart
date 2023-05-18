@@ -27,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void splashTimer(context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? token = preferences.getString('userToken');
+    debugPrint("Token => $token");
     Timer(const Duration(seconds: 3), () {
       token != null || token != ''
           ? Navigator.pushReplacement(context,

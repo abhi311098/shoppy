@@ -31,7 +31,7 @@ class ApiService {
   static Future<Object?> apiPostCall({required String url, required var body}) async {
     try {
       var uri = Uri.parse(url);
-      var response = await http.post(uri, body: body).timeout(const Duration(seconds: 30));
+      var response = await http.post(uri,body: body).timeout(const Duration(seconds: 30));
       if (response.statusCode == 200) {
         log("URL:- $url \n Response:- ${response.body}");
         return Success(response: response.body);
